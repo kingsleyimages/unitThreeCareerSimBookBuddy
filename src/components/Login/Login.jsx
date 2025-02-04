@@ -1,9 +1,33 @@
 /* TODO - add your code to create a functional React component that renders a login form */
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
-function Login(setToken) {
+function Login(token) {
+  const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  async function handleLogin(e) {
+    try {
+      e.preventDefault();
+      const data = await axios.post(
+        `${import.meta.env.VITE_API_BASE_URL}/users/login`,
+        {
+          email: email,
+          password: password,
+        }
+      );
+      console.log(data);
+      if (data.data.message === 'Login successful!') {
+        setEmail('');
+        setPassword('');
+        navigate('/');
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  }
   return (
     <>
       <form>
@@ -25,7 +49,7 @@ function Login(setToken) {
             onChange={(e) => setPassword(e.target.value)}
           />
         </label>
-        <button type="submit" style={{ display: 'block' }}>
+        <button onClick={handleLogin} style={{ display: 'block' }}>
           Submit
         </button>
       </form>

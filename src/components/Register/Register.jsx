@@ -2,28 +2,28 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
-function Register(setToken) {
+function Register({ setToken }) {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [success, setSuccess] = useState(false);
 
   async function handleSubmit(e) {
     e.preventDefault();
     try {
       const data = await axios.post(
-        'https://fsa-book-buddy-b6e748d1380d.herokuapp.com/api/register',
+        // use environment variable (vite specific syntax) to access the API base URL in ``
+        `${import.meta.env.VITE_API_BASE_URL}/users/register`,
         {
-          firstName,
-          lastName,
-          email,
-          password,
+          firstname: firstName,
+          lastname: lastName,
+          email: email,
+          password: password,
         }
       );
+      console.log(data.data.message);
       console.log(data);
-      if (data.data.success) {
-        setSuccess(true);
+      if (data.data.message === 'Registration successful!') {
         setFirstName('');
         setLastName('');
         setEmail('');
@@ -32,13 +32,12 @@ function Register(setToken) {
       setToken(data.data.token);
     } catch (err) {
       console.log(err);
-      setError(err.message);
     }
   }
 
   return (
     <>
-      <form>
+      <form onSubmit={handleSubmit}>
         <label>
           First Name:
           <input

@@ -2,6 +2,27 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  color: #dadada;
+}
+.books form {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 1%;
+}
+.books form label {
+  font-size: 1.25rem;
+  margin-right: 15px;
+  width: 20%;
+}
+.books form input {
+  width: 70%;
+  padding: 5px;
+  margin-left: 15px;
+  font-size: 1rem;
+  border: 1px solid #a6a6a6;
+  border-radius: 5px;
 }
 .singleBook {
   margin: 1%;
@@ -9,7 +30,8 @@
   display: flex;
   flex-direction: column;
   width: 15%;
-  border: 1px solid #000;
+  border: 1px solid #a6a6a6;
+  background-color: #333;
   border-radius: 10px;
 }
 .singleBook img {
@@ -18,9 +40,11 @@
   object-fit: contain;
   max-width: 150px;
   margin: 0 auto;
+  border: 1px solid #a6a6a6;
 }
 .singleBook h3 {
   text-align: center;
+  letter-spacing: 0.75px;
   font-size: 1.25rem;
   text-wrap: wrap;
   margin: 0;
@@ -29,4 +53,24 @@
   text-align: center;
   font-size: 1rem;
   margin: 0;
+}
+.singleBook button {
+  margin: 20px auto;
+  padding: 5px 15px;
+  font-size: 0.9rem;
+  background-color: #a6a6a6;
+  color: #000;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+@media (max-width: 1000px) {
+  .singleBook {
+    width: 25%;
+  }
+}
+@media (max-width: 600px) {
+  .singleBook {
+    width: 40%;
+  }
 }
