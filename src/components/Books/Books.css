@@ -5,9 +5,12 @@
 }
 .singleBook {
   margin: 1%;
-  padding: 5%;
+  padding: 2%;
   display: flex;
   flex-direction: column;
+  width: 15%;
+  border: 1px solid #000;
+  border-radius: 10px;
 }
 .singleBook img {
   width: 100%;
@@ -18,5 +21,12 @@
 }
 .singleBook h3 {
   text-align: center;
+  font-size: 1.25rem;
+  text-wrap: wrap;
+  margin: 0;
+}
+.singleBook p {
+  text-align: center;
   font-size: 1rem;
+  margin: 0;
 }

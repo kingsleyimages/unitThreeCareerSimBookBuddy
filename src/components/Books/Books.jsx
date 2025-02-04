@@ -25,6 +25,7 @@ function Books() {
       {books.map((book) => (
         <div key="book.id" className="singleBook">
           <h3>{book.title}</h3>
+          <p>{book.author}</p>
           <img src={book.coverimage} alt={book.title} />
         </div>
       ))}
