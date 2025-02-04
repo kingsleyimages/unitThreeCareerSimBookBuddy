@@ -1,0 +1,22 @@
+.books {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.singleBook {
+  margin: 1%;
+  padding: 5%;
+  display: flex;
+  flex-direction: column;
+}
+.singleBook img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  max-width: 150px;
+  margin: 0 auto;
+}
+.singleBook h3 {
+  text-align: center;
+  font-size: 1rem;
+}
