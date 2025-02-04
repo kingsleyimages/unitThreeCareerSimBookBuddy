@@ -3,7 +3,7 @@ import bookLogo from './assets/books.png';
 
 import { Routes, Route } from 'react-router-dom';
 import Home from './Pages/Home';
-
+import Signup from './Pages/Signup';
 function App() {
   const [token, setToken] = useState(null);
 
@@ -15,6 +15,7 @@ function App() {
       </h1>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/signup" element={<Signup />} />
       </Routes>
       <p>
         Complete the React components needed to allow users to browse a library
