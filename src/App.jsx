@@ -6,17 +6,25 @@ import Home from './Pages/Home';
 import Signup from './Pages/Signup';
 import Navigations from './components/Navigations/Navigations';
 import SingleBook from './Components/SingleBook/SingleBook';
+import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
+import Profile from './Pages/Profile';
 function App() {
   const [token, setToken] = useState(null);
 
   return (
     <>
-      <Navigations />
+      <Navigations token={token} setToken={setToken} />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Access token={token} />} />
-        <Route path="/signup" element={<Signup setToken={setToken} />} />
+        <Route path="/login" element={<Access setToken={setToken} />} />
+        <Route
+          path="/signup"
+          element={<Signup setToken={setToken} token={token} />}
+        />
         <Route path="/book/detail/:id" element={<SingleBook />} />
+        <Route element={<ProtectedRoute />}>
+          <Route path="/me" element={<Profile />} />
+        </Route>
         <Route path="*" element={<Home />} />
       </Routes>
       {/* <p>

@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-function Login(token) {
+function Login({ setToken }) {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -20,9 +20,11 @@ function Login(token) {
       );
       console.log(data);
       if (data.data.message === 'Login successful!') {
+        localStorage.setItem('token', data.data.token);
+        setToken(data.data.token);
         setEmail('');
         setPassword('');
-        navigate('/');
+        navigate('/me');
       }
     } catch (err) {
       console.log(err);

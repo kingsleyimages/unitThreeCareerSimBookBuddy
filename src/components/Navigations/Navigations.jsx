@@ -3,24 +3,44 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './Navigations.css';
 import bookLogo from '../../assets/books.png';
-function Navigations() {
+function Navigations({ token, setToken }) {
+  const handleClick = () => {
+    localStorage.removeItem('token');
+    setToken(null);
+  };
   return (
     <div>
       <nav>
         <ul>
           <li>
             <img id="logo-image" src={bookLogo} />
-            Library<br />App
+            Library
+            <br />
+            App
           </li>
           <li>
             <Link to="/">Home</Link>
           </li>
-          <li>
-            <Link to="/login">Login</Link>
-          </li>
-          <li>
-            <Link to="/signup">Signup</Link>
-          </li>
+          {!token && (
+            <>
+              <li>
+                <Link to="/login">Login</Link>
+              </li>
+              <li>
+                <Link to="/signup">Signup</Link>
+              </li>
+            </>
+          )}
+          {token && (
+            <>
+              <li>
+                <Link to="/me">Account</Link>
+              </li>
+              <li>
+                <button onClick={handleClick}>Logout</button>
+              </li>
+            </>
+          )}
         </ul>
       </nav>
     </div>

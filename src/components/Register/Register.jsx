@@ -24,6 +24,8 @@ function Register({ setToken }) {
       console.log(data.data.message);
       console.log(data);
       if (data.data.message === 'Registration successful!') {
+        localStorage.setItem('token', data.data.token);
+        setToken(data.data.token);
         setFirstName('');
         setLastName('');
         setEmail('');
