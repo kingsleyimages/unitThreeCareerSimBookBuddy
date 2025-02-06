@@ -3,10 +3,13 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styles from './Navigations.module.css';
 import bookLogo from '../../assets/books.png';
+import { useNavigate } from 'react-router-dom';
 function Navigations({ token, setToken }) {
+  const navigate = useNavigate();
   const handleClick = () => {
     localStorage.removeItem('token');
     setToken(null);
+    navigate('/');
   };
   return (
     <div>

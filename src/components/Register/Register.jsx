@@ -2,12 +2,14 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import styles from './Register.module.css';
+import { useNavigate } from 'react-router-dom';
 
 function Register({ setToken }) {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -24,15 +26,16 @@ function Register({ setToken }) {
       );
       console.log(data.data.message);
       console.log(data);
-      if (data.data.message === 'Registration successful!') {
+      if (data.status === 200) {
         localStorage.setItem('token', data.data.token);
         setToken(data.data.token);
+
         setFirstName('');
         setLastName('');
         setEmail('');
         setPassword('');
+        navigate('/');
       }
-      setToken(data.data.token);
     } catch (err) {
       console.log(err);
     }
