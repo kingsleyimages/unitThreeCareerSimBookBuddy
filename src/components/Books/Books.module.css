@@ -39,8 +39,7 @@
   height: 100%;
   object-fit: contain;
   max-width: 150px;
-  margin: 0 auto;
-  border: 1px solid #a6a6a6;
+  margin: 0 auto 10px;
 }
 .singleBook h3 {
   text-align: center;
@@ -55,7 +54,7 @@
   margin: 0;
 }
 .singleBook button {
-  margin: 20px auto;
+  margin: 10px auto;
   padding: 5px 15px;
   font-size: 0.9rem;
   background-color: #a6a6a6;

@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link, useParams } from 'react-router-dom';
-import './SingleBook.css';
+import styles from './SingleBook.module.css';
 
 function SingleBook({}) {
   const [book, setBook] = useState(null);
@@ -23,21 +23,21 @@ function SingleBook({}) {
     fetchBook();
   }, []);
   return (
-    <div className="container">
-      <div className="singleImage">
+    <div className={styles['container']}>
+      <div className={styles['singleImages']}>
         <img src={book?.coverimage} alt={book?.name} />
       </div>
-      <div className="singleDetails">
-        <h2>{book?.title} </h2>
-        <h4>{book?.author}</h4>
+      <div className={styles['singleDetails']}>
+        <h2 className={styles['title']}>{book?.title} </h2>
+        <h4 className={styles['author']}>{book?.author}</h4>
 
-        <p>{book?.description}</p>
-        <h5>
+        <p className={styles['description']}>{book?.description}</p>
+        <h5 className={styles['available']}>
           {book?.available === true
             ? 'Status: Available for Checkout'
             : 'Status: Out on Loan'}
         </h5>
-        <button>
+        <button className={styles['returnButton']}>
           <Link to="/"> Return to Book List</Link>
         </button>
       </div>
