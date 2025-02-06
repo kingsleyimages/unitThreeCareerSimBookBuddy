@@ -7,24 +7,25 @@ function Account({}) {
   const [userData, setUserData] = useState([]);
   const [available, setAvailable] = useState([]);
 
+  // function to get the user information from the user API.  This will be used to display the user's name and email.
   async function user() {
     try {
       const data = await axios.get(
         `${import.meta.env.VITE_API_BASE_URL}/users/me`,
         {
           headers: {
+            // pass the token from local storage to the API to authenticate the user and get the user information
             Authorization: `Bearer ${localStorage.getItem('token')}`,
           },
         }
       );
-      console.log(data.data);
+
       setUserData(data.data);
-      // setAvailable(data.data.books);
     } catch (err) {
       console.log(err);
     }
   }
-
+  // async function to get the books that have been checked out by the user.  This will be used to display the books that the user has checked out.
   async function getReservations() {
     try {
       const data = await axios.get(
@@ -35,14 +36,13 @@ function Account({}) {
           },
         }
       );
-      console.log(available);
+
       setAvailable(data.data.reservation);
-      console.log(available);
     } catch (err) {
       console.log(err);
     }
   }
-
+  // function for the button to return the book.  This will be used to return the book to the list of available books.
   async function handleReturn(bookId) {
     try {
       const data = await axios.delete(
@@ -55,9 +55,9 @@ function Account({}) {
         }
       );
       console.log(data);
+      // await the call for get reservations to update the state and rerender the page
       await getReservations();
-      // take book we returned out of state (available array)
-      // setAvailable(available.filter((book) => book.id !== bookId));
+      
     } catch (err) {
       console.log(err);
       a;
@@ -77,7 +77,9 @@ function Account({}) {
         <h3 className={styles['userEmail']}>{userData.email}</h3>
       </div>
       <h3 className={styles['title']}>Checked out books:</h3>
+      {/* check to see if there are books that have been checked out by the user */}
       {available.length > 0 ? (
+        // map over the books that have been checked out by the user and display them
         available.map((book) => (
           <div key={book.id}>
             <div className={styles['bookList']}>
@@ -96,6 +98,7 @@ function Account({}) {
           </div>
         ))
       ) : (
+          // if no books have been checked out display a message
         <p className={styles['noBooks']}>You have no books checked out</p>
       )}
     </>

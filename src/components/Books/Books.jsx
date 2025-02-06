@@ -4,15 +4,18 @@ import axios from 'axios';
 import styles from './Books.module.css';
 import { useNavigate } from 'react-router-dom';
 
+// pass the token as a prop to the Books component from app.jsx so that we can conditionally render the checkout button
 function Books({ token }) {
   let navigate = useNavigate();
   const [books, setBooks] = useState([]);
   const [filter, setFilter] = useState([]);
+  // get a list of the books from the API and update the books state and filter state
   async function getBooks() {
     try {
       // use environment variable (vite specific syntax) to access the API base URL in ``
       const data = await axios(`${import.meta.env.VITE_API_BASE_URL}/books`);
       setBooks(data.data.books);
+      // initially set filter to all books
       setFilter(data.data.books);
       console.log(books);
     } catch (err) {
@@ -22,15 +25,17 @@ function Books({ token }) {
   useEffect(() => {
     getBooks();
   }, []);
-
+  // handle the input from the search bar and filter the books based on the input  we'll then use the filtered books to render the books on the page.  This is called when the input for the search is changed.
   const handleInput = (e) => {
     const results = books.filter(
       (book) =>
         book.title.toLowerCase().includes(e.target.value.toLowerCase()) ||
         book.author.toLowerCase().includes(e.target.value.toLowerCase())
     );
+    // rerender the page with the results of the filter
     setFilter(results);
   };
+  // function to handle the checkout of a book.  This will update the book in the API to be unavailable
   async function handleCheckout(bookId) {
     try {
       const data = await axios.patch(
@@ -61,6 +66,7 @@ function Books({ token }) {
             }}>
             Book Details
           </button>
+          {/* if there is a token and the book is available then show the checkout button */}
           {token && book.available ? (
             <button
               onClick={() => {

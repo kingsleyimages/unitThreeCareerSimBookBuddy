@@ -5,12 +5,14 @@ import styles from './Register.module.css';
 import { useNavigate } from 'react-router-dom';
 
 function Register({ setToken }) {
+  // set states for the form fields
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
+  // fucntion to handle the submit and post request to the API
   async function handleSubmit(e) {
     e.preventDefault();
     try {
@@ -26,8 +28,11 @@ function Register({ setToken }) {
       );
       console.log(data.data.message);
       console.log(data);
+      // if statement to run if that post was successful.
       if (data.status === 200) {
+        // set the token in local storage and state
         localStorage.setItem('token', data.data.token);
+        // set token via this function that was passed as prop from app.jsx so that it can be used elsewhere
         setToken(data.data.token);
 
         setFirstName('');
@@ -43,6 +48,7 @@ function Register({ setToken }) {
 
   return (
     <>
+      {/* way to add module styles to the from so they only scope to this page. */}
       <div className={styles['formContainer']}>
         <h3>Please create an account to interact with our library.</h3>
         <form className={styles['form']} onSubmit={handleSubmit}>

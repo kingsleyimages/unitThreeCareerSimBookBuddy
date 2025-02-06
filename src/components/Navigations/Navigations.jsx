@@ -4,8 +4,12 @@ import { Link } from 'react-router-dom';
 import styles from './Navigations.module.css';
 import bookLogo from '../../assets/books.png';
 import { useNavigate } from 'react-router-dom';
+
+// create navigation Bar with links to Home, Login, Signup, Account, and Logout
 function Navigations({ token, setToken }) {
   const navigate = useNavigate();
+
+  // create a handle click to remove the token from local storage and set the token to null.  This will log the user out and navigate them to the home page.
   const handleClick = () => {
     localStorage.removeItem('token');
     setToken(null);
@@ -23,6 +27,7 @@ function Navigations({ token, setToken }) {
           <li className={styles['listItem']}>
             <Link to="/">Home</Link>
           </li>
+          {/* conditionally render the login and signup links based on if the user is logged in or not */}
           {!token && (
             <>
               <li className={styles['listItem']}>
@@ -33,6 +38,7 @@ function Navigations({ token, setToken }) {
               </li>
             </>
           )}
+          {/* conditionally render the account and logout links based on if the user is logged in or not */}
           {token && (
             <>
               <li className={styles['listItem']}>

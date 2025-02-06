@@ -13,6 +13,7 @@ function App() {
   const [token, setToken] = useState(null);
   useEffect(() => {
     console.log('effect running...');
+    // if theres a token in the browser, set the token to that token so it can be passed down to the other components.
     const localToken = localStorage.getItem('token');
     if (localToken) {
       setToken(localToken);
@@ -29,6 +30,7 @@ function App() {
           element={<Signup setToken={setToken} token={token} />}
         />
         <Route path="/book/detail/:id" element={<SingleBook />} />
+        {/* create section for protected routes */}
         <Route element={<ProtectedRoute />}>
           <Route path="/me" element={<Profile token={token} />} />
         </Route>

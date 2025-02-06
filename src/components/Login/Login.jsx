@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import styles from './Login.module.css';
 
+// use the setToken state from app.jsx to set the token in local storage and state
 function Login({ setToken }) {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
@@ -21,6 +22,7 @@ function Login({ setToken }) {
       );
       console.log(data);
       if (data.data.message === 'Login successful!') {
+        // if login was successful, set the token in local storage and state, clear input fields and navigate to the account page
         localStorage.setItem('token', data.data.token);
         setToken(data.data.token);
         setEmail('');
