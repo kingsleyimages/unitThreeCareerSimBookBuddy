@@ -8,14 +8,21 @@ import Navigations from './components/Navigations/Navigations';
 import SingleBook from './Components/SingleBook/SingleBook';
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 import Profile from './Pages/Profile';
+import { useEffect } from 'react';
 function App() {
   const [token, setToken] = useState(null);
-
+  useEffect(() => {
+    console.log('effect running...');
+    const localToken = localStorage.getItem('token');
+    if (localToken) {
+      setToken(localToken);
+    }
+  }, []);
   return (
     <>
       <Navigations token={token} setToken={setToken} />
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Home token={token} />} />
         <Route path="/login" element={<Access setToken={setToken} />} />
         <Route
           path="/signup"
@@ -23,7 +30,7 @@ function App() {
         />
         <Route path="/book/detail/:id" element={<SingleBook />} />
         <Route element={<ProtectedRoute />}>
-          <Route path="/me" element={<Profile />} />
+          <Route path="/me" element={<Profile token={token} />} />
         </Route>
         <Route path="*" element={<Home />} />
       </Routes>
