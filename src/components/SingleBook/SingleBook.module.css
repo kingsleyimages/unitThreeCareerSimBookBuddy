@@ -1,0 +1,83 @@
+.container {
+  display: flex;
+  width: 90%;
+  margin: 0 auto;
+  flex-direction: row;
+  color: #dedede;
+  letter-spacing: 1px;
+}
+.singleImage {
+  width: 100%;
+  max-width: 500px;
+  margin: 0;
+  display: flex;
+  justify-content: end;
+}
+.singleImage img {
+  width: 300px;
+  height: 450px;
+  object-fit: contain;
+  height: auto;
+  border: 1px solid #dedede;
+}
+
+.singleDetails {
+  width: 60%;
+  padding: 0 20px;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+}
+h2,
+h4,
+p {
+  margin: 0;
+  padding: 0;
+}
+.title {
+  font-size: 1.75rem;
+  margin: 10px 0;
+}
+.author {
+  font-size: 1.3rem;
+  margin: 5px 0;
+  font-weight: 400;
+  text-emphasis: italic;
+}
+.available {
+  font-weight: 400;
+  font-size: 1rem;
+}
+.description {
+  font-size: 1rem;
+  margin: 5px 0;
+  font-weight: 400;
+  line-height: 1.6rem;
+}
+
+.returnButton {
+  margin: 20px 0;
+  width: 150px;
+  padding: 10px 0px;
+  font-size: 0.9rem;
+  background-color: #dedede;
+  color: #000;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
+}
+.returnButton a {
+  text-decoration: none;
+  color: #000;
+  width: 100%;
+  height: 100%;
+}
+
+.returnButton:hover,
+.returnButton a:hover {
+  background-color: #000;
+  color: #fff;
+  text-decoration: none;
+}

@@ -1,22 +1,40 @@
 import { useState } from 'react';
-import bookLogo from './assets/books.png';
 
+import Access from './Pages/Access';
 import { Routes, Route } from 'react-router-dom';
 import Home from './Pages/Home';
-
+import Signup from './Pages/Signup';
+import Navigations from './components/Navigations/Navigations';
+import SingleBook from './Components/SingleBook/SingleBook';
+import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
+import Profile from './Pages/Profile';
+import { useEffect } from 'react';
 function App() {
   const [token, setToken] = useState(null);
-
+  useEffect(() => {
+    console.log('effect running...');
+    const localToken = localStorage.getItem('token');
+    if (localToken) {
+      setToken(localToken);
+    }
+  }, []);
   return (
     <>
-      <h1>
-        <img id="logo-image" src={bookLogo} />
-        Library App
-      </h1>
+      <Navigations token={token} setToken={setToken} />
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Home token={token} />} />
+        <Route path="/login" element={<Access setToken={setToken} />} />
+        <Route
+          path="/signup"
+          element={<Signup setToken={setToken} token={token} />}
+        />
+        <Route path="/book/detail/:id" element={<SingleBook />} />
+        <Route element={<ProtectedRoute />}>
+          <Route path="/me" element={<Profile token={token} />} />
+        </Route>
+        <Route path="*" element={<Home />} />
       </Routes>
-      <p>
+      {/* <p>
         Complete the React components needed to allow users to browse a library
         catalog, check out books, review their account, and return books that
         they've finished reading.
@@ -30,7 +48,7 @@ function App() {
       <p>
         Don't forget to set up React Router to navigate between the different
         views of your single page application!
-      </p>
+      </p> */}
     </>
   );
 }

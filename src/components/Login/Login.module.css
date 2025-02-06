@@ -1,0 +1,38 @@
+h3 {
+  text-align: center;
+}
+
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10%;
+  border: 1px solid black;
+  background-color: #eee;
+  width: 30%;
+  margin: 0 auto;
+  border-radius: 10px;
+}
+.form {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 1% auto;
+}
+.submitButton {
+  margin: 10px auto;
+  padding: 5px 15px;
+  font-size: 0.9rem;
+  background-color: #a6a6a6;
+  color: #000;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
